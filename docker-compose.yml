@@ -2,19 +2,7 @@
 version: '3.8'
 
 services:
-  db:
-    container_name: db
-    image: postgres:14-alpine
-    restart: always
-    environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=postgres
-     - POSTGRES_DB=postgres
-    ports:
-      - '5432:5432' 
-    volumes:
-      - db-data:/var/lib/postgresql/data
-
+  
   app:
     build: .
     restart: always
@@ -29,6 +17,17 @@ services:
       - PG_PORT=5432
     depends_on:
       - db
-
+  db:
+    container_name: db
+    image: postgres:12
+    restart: always
+    environment:
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+     - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432' 
+    volumes:
+      - db-data:/var/lib/postgresql/data
 volumes:
   db-data:
