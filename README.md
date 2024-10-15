@@ -49,6 +49,7 @@ $ npm run start:prod
 sudo lsof -i :5432
 sudo pkill -u postgres
 sudo service postgresql start
+env | grep POSTGRES
 
 ## Run tests
 

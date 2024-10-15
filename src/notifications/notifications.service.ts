@@ -10,6 +10,7 @@ import { Price } from '../price/price.entity';
 export class NotificationService {
   private readonly logger = new Logger(NotificationService.name);
   private readonly recipientEmail: string;
+  private readonly priceIncreaseThreshold: number;
 
   constructor(
     @InjectRepository(Price)
@@ -22,6 +23,9 @@ export class NotificationService {
       this.logger.error('NOTIFICATION_RECIPIENT_EMAIL is not defined in environment variables.');
       throw new Error('NOTIFICATION_RECIPIENT_EMAIL is required.');
     }
+    this.priceIncreaseThreshold = parseFloat(
+      this.configService.get<string>('PRICE_INCREASE_THRESHOLD') || '3',
+    );
   }
 
   /**
@@ -73,7 +77,7 @@ export class NotificationService {
         this.logger.debug(`${chain} price increase: ${priceIncrease.toFixed(2)}%`);
 
         // If price increased by more than 3%, send an email
-        if (priceIncrease > 3) {
+        if (priceIncrease > this.priceIncreaseThreshold) {
           await this.sendPriceIncreaseEmail(chain, newPrice, oldPrice, priceIncrease);
         }
       } catch (error) {

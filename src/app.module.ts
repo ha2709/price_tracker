@@ -13,17 +13,17 @@ import { PriceModule } from './price/price.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [ '.env'],
+      envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DATABASE_HOST') || "db",
-        port: parseInt(configService.get<string>('DATABASE_PORT'), 10) || 5432,
-        username: configService.get<string>('DATABASE_USER') || "postgres",
-        password: configService.get<string>('DATABASE_PASSWORD') || "1234",
-        database: configService.get<string>('DATABASE_NAME') || "price_tracker_db", 
+        host: configService.get<string>('PG_HOST') || "db",
+        port: parseInt(configService.get<string>('PG_PORT'), 10) || 5432,
+        username: configService.get<string>('PG_USER') || "postgres",
+        password: configService.get<string>('PG_PASSWORD') || "postgres",
+        database: configService.get<string>('PG_DB') || "price_tracker_db", 
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true, // Disable in production
       }),

@@ -16,12 +16,12 @@ export class PriceService {
   private readonly tokens = [
     {
       name: 'Ethereum',
-      address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',  
+      address: process.env.ETHEREUM_ADDRESS,
       chain: EvmChain.ETHEREUM,
     },
     {
       name: 'Polygon',
-      address: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',  
+      address: process.env.POLYGON_ADDRESS,
       chain: EvmChain.POLYGON,
     },
   ];
