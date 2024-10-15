@@ -23,7 +23,7 @@ import { PriceModule } from './price/price.module';
         port: parseInt(configService.get<string>('PG_PORT'), 10) || 5432,
         username: configService.get<string>('PG_USER') || "postgres",
         password: configService.get<string>('PG_PASSWORD') || "postgres",
-        database: configService.get<string>('PG_DB') || "price_tracker_db", 
+        database: configService.get<string>('PG_DB') || "postgres", 
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true, // Disable in production
       }),
